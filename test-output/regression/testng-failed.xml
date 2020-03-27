@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [regression]">
+  <test thread-count="5" name="Testng Assert Demo(failed)">
+    <classes>
+      <class name="org.ej.learning.TestNGExample">
+        <methods>
+          <include name="example1"/>
+        </methods>
+      </class> <!-- org.ej.learning.TestNGExample -->
+    </classes>
+  </test> <!-- Testng Assert Demo(failed) -->
+</suite> <!-- Failed suite [regression] -->

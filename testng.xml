@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="regression" >
+
+<!-- parallel="classes"  thread-count="2">	 -->
+<!-- // parallel="tests" thread-count="2" group-by-instances="true" preserve-order="true" -->
+
+		<test name="Testng Assert Demo">
+		<classes>
+            <class name="org.ej.learning.TestNGExample" >
+            <methods>
+            <include name="m1"></include>
+            </methods>
+            </class>
+        </classes>
+		
+		</test>
+        
+	 <!-- <test name="group test">
+	 
+	 	<parameter name="num1" value="100"></parameter>
+	   	<parameter name="num2" value="120"></parameter>
+	   	<parameter name="num3" value="81"></parameter>
+        <groups>
+            <run>
+                <exclude name="group2" />
+            </run>
+        </groups>
+        
+        <classes>
+            <class name="org.ej.learning.Maths" />
+            <class name="org.ej.learning.Maths1234" />
+        </classes>
+    </test> -->
+
+
+	<!--   <test name="Verify addition, Subtraction, multiplication, division and square root" >
+	   
+	   <parameter name="tcid" value="TC-1"></parameter>
+	   <parameter name="rid" value="R-1"></parameter>
+	   <parameter name="owner" value="Satish"></parameter>
+	   <parameter name="creation_date" value="04/08/2017"></parameter>   
+	   <parameter name="num1" value="100"></parameter>
+	   <parameter name="num2" value="120"></parameter>
+	   <parameter name="num3" value="81"></parameter>
+	   <classes>
+	   		
+	   		 
+	   		<class name="org.ej.learning.Maths">
+	   			<methods>	   				
+	   				<include name="multiply"></include>
+	   				<include name="add"></include>
+	   				<include name="subtract"></include>
+	   				
+	   				<include name="division"></include>
+	   			</methods>    		
+	   		</class>	
+	   		
+	   		<class name="org.ej.learning.Maths1234"></class>
+	   		
+			
+	   </classes>
+   </test> -->
+   
+
+   
+
+   <!-- <test name="Verify addition and Subtraction of two numbers">
+	   <parameter name="tcid" value="TC-1"></parameter>
+	   <parameter name="rid" value="R-1"></parameter>
+	   <parameter name="owner" value="Satish"></parameter>
+	   <parameter name="creation_date" value="04/08/2017"></parameter>   
+	   <parameter name="num1" value="100"></parameter>
+	   <parameter name="num2" value="120"></parameter>
+	   <classes>
+	   		<class name="org.ej.learning.Maths">
+	   			<methods>	   				
+	   				<include name="add"></include>
+	   				<include name="subtract"></include>
+	   			</methods>	   		
+	   		</class>	   		
+	   </classes>
+   </test>
+    -->
+   
+  <!--
+   <test name="Verify multiplication and division of two numbers">   
+	   <parameter name="tcid" value="TC-2"></parameter>
+	   <parameter name="rid" value="R-1"></parameter>
+	   <parameter name="owner" value="Satish"></parameter>
+	   <parameter name="creation_date" value="04/08/2017"></parameter>
+	   <parameter name="num1" value="100"></parameter>
+	   <parameter name="num2" value="120"></parameter>	   
+	   <classes>
+	   		<class name="org.ej.learning.Maths">
+	   			<methods>	   				
+	   				<include name="multiply"></include>
+	   				<include name="division"></include>
+	   			</methods>
+	   		</class>
+	   </classes>
+   </test>
+    
+   <test name="Verify addition , Subtraction and Multiplication of two numbers">
+	   <parameter name="tcid" value="TC-3"></parameter>
+	   <parameter name="rid" value="R-1"></parameter>
+	   <parameter name="owner" value="Satish"></parameter>
+	   <parameter name="creation_date" value="04/08/2017"></parameter>
+	   <parameter name="num1" value="100"></parameter>
+	   <parameter name="num2" value="120"></parameter>	   
+	   <classes>
+	   		<class name="org.ej.learning.Maths">
+	   			<methods>	   				
+	   				<include name="add"></include>
+	   				<include name="subtract"></include>
+	   				<include name="multiply"></include>
+	   			</methods>
+	   		</class>
+	   </classes>
+   </test>
+   
+   <test name="Verify multiplication, division and Subtraction of two numbers">
+	   <parameter name="tcid" value="TC-4"></parameter>
+	   <parameter name="rid" value="R-1"></parameter>
+	   <parameter name="owner" value="Satish"></parameter>
+	   <parameter name="creation_date" value="04/08/2017"></parameter>
+	   <parameter name="num1" value="100"></parameter>
+	   <parameter name="num2" value="120"></parameter>	   
+	   <classes>
+	   		<class name="org.ej.learning.Maths">
+	   			<methods>
+		  			<exclude name="add"></exclude>
+		  		</methods>
+	   		</class>	   		
+	   </classes>
+   </test>
+   
+   <test name="Verify multiplication, division ,Subtraction and Addition of two numbers">
+	   <parameter name="tcid" value="TC-5"></parameter>
+	   <parameter name="rid" value="R-1"></parameter>
+	   <parameter name="owner" value="Satish"></parameter>
+	   <parameter name="creation_date" value="04/08/2017"></parameter>
+	   <parameter name="num1" value="100"></parameter>
+	   <parameter name="num2" value="120"></parameter>	   
+	   <classes>
+	   		<class name="org.ej.learning.Maths">
+	   		  	<methods>
+		   			<include name="multiply"></include>
+		   			<include name="division"></include>
+		   			<include name="subtract"></include>
+		   			<include name="add"></include>
+	   			</methods> 
+	   		</class>
+	   </classes>
+   </test> 
+    -->
+</suite> 
