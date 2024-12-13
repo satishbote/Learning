@@ -1,0 +1,108 @@
+To read emails from Office 365 in Java, you can use the Microsoft Graph API along with the Microsoft Authentication Library (MSAL) for authentication. Below is a step-by-step guide and code example:
+
+1. Register Your App in Azure AD
+	1.	Go to the Azure Portal.
+	2.	Register a new application under “Azure Active Directory” > “App registrations.”
+	3.	Configure API permissions:
+	•	Add the Microsoft Graph permission: Mail.Read.
+	4.	Generate a client secret under “Certificates & secrets.”
+
+2. Add Dependencies
+
+Include the following dependencies in your pom.xml (if using Maven):
+
+<dependencies>
+    <!-- Microsoft Authentication Library -->
+    <dependency>
+        <groupId>com.microsoft.aad.msal4j</groupId>
+        <artifactId>msal4j</artifactId>
+        <version>1.13.8</version>
+    </dependency>
+    <!-- HTTP Client -->
+    <dependency>
+        <groupId>org.apache.httpcomponents</groupId>
+        <artifactId>httpclient</artifactId>
+        <version>4.5.13</version>
+    </dependency>
+    <!-- JSON Parsing -->
+    <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-databind</artifactId>
+        <version>2.15.2</version>
+    </dependency>
+</dependencies>
+
+3. Java Code to Read Emails
+
+import com.microsoft.aad.msal4j.*;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+
+import java.net.URI;
+import java.util.Collections;
+import java.util.concurrent.CompletableFuture;
+
+public class Office365EmailReader {
+
+    private static final String CLIENT_ID = "your-client-id"; // Replace with your app's client ID
+    private static final String CLIENT_SECRET = "your-client-secret"; // Replace with your app's client secret
+    private static final String TENANT_ID = "your-tenant-id"; // Replace with your tenant ID
+    private static final String AUTHORITY = "https://login.microsoftonline.com/" + TENANT_ID;
+    private static final String GRAPH_API_URL = "https://graph.microsoft.com/v1.0/me/messages";
+
+    public static void main(String[] args) {
+        try {
+            String accessToken = getAccessToken();
+            fetchEmails(accessToken);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static String getAccessToken() throws Exception {
+        ConfidentialClientApplication app = ConfidentialClientApplication.builder(
+                CLIENT_ID,
+                ClientCredentialFactory.createFromSecret(CLIENT_SECRET))
+                .authority(AUTHORITY)
+                .build();
+
+        ClientCredentialParameters parameters = ClientCredentialParameters.builder(
+                Collections.singleton("https://graph.microsoft.com/.default"))
+                .build();
+
+        CompletableFuture<IAuthenticationResult> future = app.acquireToken(parameters);
+        return future.get().accessToken();
+    }
+
+    private static void fetchEmails(String accessToken) throws Exception {
+        CloseableHttpClient httpClient = HttpClients.createDefault();
+        HttpGet request = new HttpGet(GRAPH_API_URL);
+        request.addHeader("Authorization", "Bearer " + accessToken);
+
+        try (CloseableHttpResponse response = httpClient.execute(request)) {
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode rootNode = mapper.readTree(response.getEntity().getContent());
+
+            for (JsonNode message : rootNode.get("value")) {
+                String subject = message.get("subject").asText();
+                String sender = message.get("from").get("emailAddress").get("address").asText();
+                System.out.println("Subject: " + subject);
+                System.out.println("From: " + sender);
+                System.out.println("-------------------");
+            }
+        }
+    }
+}
+
+4. Run the Code
+	1.	Replace your-client-id, your-client-secret, and your-tenant-id with the appropriate values from Azure AD.
+	2.	Compile and run the program.
+
+Notes
+	•	Make sure the app has the necessary permissions (Mail.Read) granted and consented in Azure AD.
+	•	The code fetches emails using the /me/messages endpoint of the Microsoft Graph API.
+	•	For interactive user login, replace ConfidentialClientApplication with PublicClientApplication and follow the OAuth 2.0 flow for user authentication.
